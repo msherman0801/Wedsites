@@ -34,6 +34,14 @@ ActiveRecord::Schema.define(version: 2019_04_26_153359) do
   end
 
   create_table "contents", force: :cascade do |t|
+    t.text "spouse_one"
+    t.text "spouse_two"
+    t.text "about_us"
+    t.text "summary"
+    t.datetime "date"
+    t.text "location"
+    t.text "registry_name"
+    t.string "registry_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
