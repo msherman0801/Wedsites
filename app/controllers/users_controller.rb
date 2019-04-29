@@ -6,8 +6,8 @@ class UsersController < ApplicationController
 
     def create
         user = User.create(user_params(:username, :password, :first_name, :last_name))
-        session_save(user)
-        redirect_to '/dashboard'
+        session_save(1, user)
+        redirect_to_dash
     end
 
     def signin
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
         return redirect_to 'login' if !user_params(:username).present? || !user_params(:password).present?
         user = User.find_by(user_params(:username))
         return redirect_to '/login' if !user
-        session_save(user)
+        session_save(1, user)
         redirect_to_dash
     end
 

@@ -1,0 +1,26 @@
+<%= form_tag(@invitation) do %>
+    <%= label_tag :first_name %>
+    <%= text_field_tag :first_name %>
+
+    <%= label_tag :last_name %>
+    <%= text_field_tag :last_name %>
+
+    <%= submit_tag %>
+<% end %>
+
+<% if !@invitations.empty? %>
+    <table style="display: block;">
+        <tr><strong>Name</strong></tr>
+        <tr><strong>Attending</strong></tr>
+        <% @invitations.each do |i| %>
+            <tr>
+                <td><%= link_to "Show Invitation", invitation_path(i) %>
+                <td><%= "#{i.first_name} #{i.last_name}" %></td>
+                <td><%= i.accepted %></td>
+                <td><%= i.date_responded %></td>
+                <td><%= i.guests %></td>
+                <td><%= i.allergies %></td>
+            </tr>
+        <% end %>
+    </table>
+<% end %>

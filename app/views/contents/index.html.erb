@@ -1,0 +1,24 @@
+<%= form_for :content do |f| %>
+    <%= f.label "Partner" %>
+    <%= f.text_field :spouse_one %>
+    <br></br>
+
+    <%= f.label :partner %>
+    <%= f.text_field :spouse_two %>
+    <br></br>
+
+
+    <p>Write a short summary for the wedding!</p>
+    <%= f.text_area :summary %>
+    <br></br>
+
+    <%= f.label :about_us %>
+    <%= f.text_area :about_us %>
+    <br></br>
+
+    <%= f.label :datetime %>
+    <%= datetime_select(:date, "written_on", prompt: {day: 'Choose day', month: 'Choose month', year: 'Choose year'}) %>
+    <br></br>
+
+    <%= f.submit %>
+<% end %>

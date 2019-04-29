@@ -1,2 +1,15 @@
-<%= link_to "Dashboard", dashboard_path %>
-<%= link_to "Logout", '/logout' %>
+
+
+<% if @active_site %>
+    <h3>You're dashboard is currently loading <%= @active_site.name %>!</h3>
+<% end %>
+
+<h4>If you've built a website, it will appear below. Click on that website to manage it's settings.</h4>
+
+<%= form_tag create_path do %>
+    <%= submit_tag "Create a Website" %>
+<% end %>
+
+<% @websites.each do |w| %>
+    <h2><%= link_to w.id, '/dashboard/home?' + {id: w.id}.to_param, method: :post %></h2>
+<% end %>

@@ -6,7 +6,9 @@ ruby '2.5.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
-
+# Capybara testing
+gem 'capybara', '~> 2.13'
+gem "database_cleaner"
 gem 'rspec-rails'
 # Binding.pry
 gem 'pry'

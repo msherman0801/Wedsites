@@ -52,6 +52,13 @@ ActiveRecord::Schema.define(version: 2019_04_26_153359) do
   end
 
   create_table "invitations", force: :cascade do |t|
+    t.datetime "date_responded"
+    t.boolean "accepted"
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "guests"
+    t.text "allergies"
+    t.integer "website_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -67,6 +74,8 @@ ActiveRecord::Schema.define(version: 2019_04_26_153359) do
   end
 
   create_table "websites", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
