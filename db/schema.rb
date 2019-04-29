@@ -47,6 +47,12 @@ ActiveRecord::Schema.define(version: 2019_04_26_153359) do
   end
 
   create_table "events", force: :cascade do |t|
+    t.text "title"
+    t.string "description"
+    t.datetime "date"
+    t.string "location"
+    t.string "attire"
+    t.integer "website_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
