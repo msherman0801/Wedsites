@@ -1,9 +1,10 @@
 <div style="display: block;">
 <%= link_to "Dashboard", home_path %>
 <% if current_website %>
-    <%= link_to "Content", contents_path %>
+    <%= link_to "Content", edit_content_path(current_website.content) %>
     <%= link_to "Invitations", invitations_path %>
     <%= link_to "Events", events_path %>
+    <%= link_to "Images", images_upload_path %>
 <% end %>
 <%= link_to "Logout", logout_path %>
 </div>

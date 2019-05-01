@@ -1,6 +1,7 @@
 class EventsController < DashboardController
 
     def index
+        @events = current_website.events.all
     end
 
     def new
@@ -8,21 +9,29 @@ class EventsController < DashboardController
     end
     
     def create
-        event = Event.create(params.require(:event).permit(:title, :description, :date, :location, :attire))
+        event = Event.create(event_params)
         current_website.events << event
         redirect_to event_path(event)
     end
     
     def show
-        @event = Event.find(params[:id])
+        @event = id(Event)
+    end
+
+    def edit
+        @event = id(Event)
     end
 
     def update
+        event = id(Event)
+        event.update(event_params)
+        event.save
+        redirect_to event_path(event)
     end
 
     private
 
-    def event_params(*args)
-        params.permit(:event).permit(*args)
+    def event_params
+        params.require(:event).permit(:title, :description, :date, :location, :attire)
     end
 end

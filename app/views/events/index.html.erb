@@ -1,1 +1,10 @@
 <%= link_to "New Event", new_event_path %>
+
+<% @events.each do |i| %>
+    <li>
+    <%= link_to i.title, event_path(i) %>
+    <%= i.description %>
+    <%= i.location %>
+    <%= i.date %>
+    </li>
+<% end %>

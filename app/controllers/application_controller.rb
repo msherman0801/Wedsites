@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
     helper_method :session_save
     helper_method :logged_in?
     helper_method :redirect_to_dash
-    helper_method :require_website
+    helper_method :require_website 
+    helper_method :id
 
 
     def current_user
@@ -14,6 +15,10 @@ class ApplicationController < ActionController::Base
 
     def current_website
         Website.find_by(id: session[:website_id].to_i)
+    end
+
+    def id(model)
+        model.find(params[:id])
     end
 
     def logged_in?

@@ -9,10 +9,12 @@ class DashboardController < ApplicationController
     end
 
     def create
-        current_user.websites << (website = Website.create)
+        current_user.websites << (website = Website.create(params.permit(:key)))
         current_user.save
         session_save(2, website)
+        current_website.uploads.attach(params.permit(uploads:[]))
+        current_website.content = Content.create
+        current_website.save
         redirect_to home_path
     end
-
 end

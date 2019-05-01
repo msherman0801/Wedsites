@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   root 'welcome#index'
 
   # User Routes
@@ -6,13 +7,18 @@ Rails.application.routes.draw do
   post 'login' => 'users#login'
   get 'logout' => 'users#logout'
 
-  resources :users, only: [:new, :create, :edit, :update, :show]
+  get '/auth/facebook/callback' => 'users#fblogin'
 
+  resources :users, only: [:new, :create, :edit, :update, :show]
+  resources :websites, only: [:index, :show]
+  
   scope :dashboard, path: '/dashboard' do
     get 'home'  => 'dashboard#index'
     post 'home' => 'dashboard#index'
     post 'create' => 'dashboard#create'
-    resources :contents
+    get 'images/upload' => 'images#new'
+    post 'images/upload' => 'images#create'
+    resources :contents, only: [:index, :edit, :update]
     resources :invitations
     resources :events
   end

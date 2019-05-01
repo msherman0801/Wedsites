@@ -1,0 +1,11 @@
+<% if @website.user_id == current_user.id %>
+    <%= link_to "Go to Dashboard", home_path %>
+<% end %>
+
+<div style="margin-top: 3%;">
+    <%= render 'content' %>
+</div>
+
+<div style="margin-top: 3%;">
+    <%= render 'events' %>
+</div>

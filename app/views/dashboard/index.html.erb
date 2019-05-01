@@ -1,4 +1,15 @@
+<html>
+    <head>
 
+    </head>
+
+</html>
+
+
+<strong>Hello, <%= current_user.first_name %>! </strong> <br />
+<% if current_user.image %>
+<%= image_tag current_user.image %>
+<% end %>
 
 <% if @active_site %>
     <h3>You're dashboard is currently loading <%= @active_site.name %>!</h3>
@@ -7,9 +18,32 @@
 <h4>If you've built a website, it will appear below. Click on that website to manage it's settings.</h4>
 
 <%= form_tag create_path do %>
+    <%= label_tag "Wedding Name" %>
+    <%= text_field_tag :key %>
+    <%= label_tag :uploads %>
+    <%= file_field_tag :uploads, multiple: true %>
     <%= submit_tag "Create a Website" %>
 <% end %>
 
 <% @websites.each do |w| %>
-    <h2><%= link_to w.id, '/dashboard/home?' + {id: w.id}.to_param, method: :post %></h2>
+    <ul>
+    <li><h2><%= link_to w.id, '/dashboard/home?' + {id: w.id}.to_param, method: :post %></h2></li>
+    <li><h4><%= link_to "Load website", website_path(w) %></h4></li>
+    </ul>
+<% end %>
+
+<% if current_user && current_user.uploads.attached? %>
+    <% current_user.uploads.each do |image| %>
+        <%= image_tag(image, width: 200) %>
+    <% end %>
+<% else %>
+    <p>no uploads</p>
+<% end %>
+
+<% if current_website && current_website.uploads.attached? %>
+    <% current_website.uploads.each do |image| %>
+        <%= image_tag(image, width: 200) %>
+    <% end %>
+<% else %>
+    <p>no uploads</p>
 <% end %>

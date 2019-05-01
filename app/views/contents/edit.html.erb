@@ -3,7 +3,8 @@
 <%= @content.spouse_two %>
 <% end %>
 
-<%= form_for :content do |f| %>
+
+<%= form_for(@content) do |f| %>
     <%= f.label "Partner" %>
     <%= f.text_field :spouse_one %>
     <br></br>

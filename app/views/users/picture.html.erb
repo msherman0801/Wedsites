@@ -1,0 +1,10 @@
+<div class="field">
+  <%= label_tag :picture %>
+  <%= file_field_tag :picture %>
+  <%= submit_tag %>
+<% end %>
+</div>
+
+<p>
+  <%= image_tag(@user.picture, width: 200) if @user.picture.attached? %> 
+</p>

@@ -1,13 +1,18 @@
 class ContentsController < DashboardController
     before_action :require_website
-    
-    def index
 
+    def index
+        @content = current_website.content
     end
 
-    def create
-        content = Content.create(content_params(:spouse_one, :spouse_two, :summary, :about_us))
-        content.date
+    def edit
+        @content = current_website.content
+    end
+
+    def update
+        current_website.content.update(content_params(:spouse_one, :spouse_two, :summary, :about_us))
+        current_website.save
+        redirect_to edit_content_path(current_website.content)
     end
 
     private

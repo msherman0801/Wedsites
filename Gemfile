@@ -10,6 +10,12 @@ gem 'rails', '~> 5.2.3'
 gem 'capybara', '~> 2.13'
 gem "database_cleaner"
 gem 'rspec-rails'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'dotenv-rails'
+gem 'thin'
+gem 'bootstrap'
+gem 'jquery-rails'
 # Binding.pry
 gem 'pry'
 # Hashing passwords and encryption

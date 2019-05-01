@@ -1,0 +1,21 @@
+<%= form_for(@event) do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+
+    <%= f.label :date %>
+    <%= f.text_field :date %>
+
+    <%= f.label :date %>
+    <%= datetime_select("article", "written_on", prompt: {hour: true}) %>
+
+    <%= f.label :location %>
+    <%= f.text_field :location %>
+
+    <%= f.label :attire %>
+    <%= f.select :attire, options_for_select(["Formal", "Non-Formal"]) %>
+
+    <%= f.submit %>
+<% end %>

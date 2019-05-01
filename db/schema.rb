@@ -34,14 +34,15 @@ ActiveRecord::Schema.define(version: 2019_04_26_153359) do
   end
 
   create_table "contents", force: :cascade do |t|
-    t.text "spouse_one"
-    t.text "spouse_two"
-    t.text "about_us"
-    t.text "summary"
+    t.text "spouse_one", default: "Spouse One"
+    t.text "spouse_two", default: "Spouse Two"
+    t.text "about_us", default: "About Us"
+    t.text "summary", default: "Summary"
     t.datetime "date"
-    t.text "location"
-    t.text "registry_name"
-    t.string "registry_url"
+    t.text "location", default: "Location"
+    t.text "registry_name", default: "Registry Name"
+    t.string "registry_url", default: "Registry URL"
+    t.integer "website_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -74,6 +75,9 @@ ActiveRecord::Schema.define(version: 2019_04_26_153359) do
     t.string "password_digest"
     t.string "first_name"
     t.string "last_name"
+    t.string "email"
+    t.string "image"
+    t.string "uid"
     t.boolean "admin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -81,7 +85,9 @@ ActiveRecord::Schema.define(version: 2019_04_26_153359) do
 
   create_table "websites", force: :cascade do |t|
     t.string "name"
+    t.string "key"
     t.integer "user_id"
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
