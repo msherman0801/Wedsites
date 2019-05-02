@@ -2,28 +2,38 @@
 <%= @content.spouse_one %>
 <%= @content.spouse_two %>
 <% end %>
+    <div class="col-sm-12 col-md-12 well" id="content">
+        <div class="row">
+            <div class="col-md-6">
+                <%= form_for :content do |f| %>
+                    <%= f.label "Partner" %>
+                    <%= f.text_field :spouse_one %>
+                    <br></br>
 
-<%= form_for :content do |f| %>
-    <%= f.label "Partner" %>
-    <%= f.text_field :spouse_one %>
-    <br></br>
-
-    <%= f.label :partner %>
-    <%= f.text_field :spouse_two %>
-    <br></br>
+                    <%= f.label :partner %>
+                    <%= f.text_field :spouse_two %>
+                    <br></br>
 
 
-    <p>Write a short summary for the wedding!</p>
-    <%= f.text_area :summary %>
-    <br></br>
+                    <p>Write a short summary for the wedding!</p>
+                    <%= f.text_area :summary %>
+                    <br></br>
 
-    <%= f.label :about_us %>
-    <%= f.text_area :about_us %>
-    <br></br>
+                    <%= f.label :about_us %>
+                    <%= f.text_area :about_us %>
+                    <br></br>
 
-    <%= f.label :datetime %>
-    <%= datetime_select(:date, "written_on", prompt: {day: 'Choose day', month: 'Choose month', year: 'Choose year'}) %>
-    <br></br>
+                    <%= f.label :datetime %>
+                    <%= datetime_select(:date, "written_on", prompt: {day: 'Choose day', month: 'Choose month', year: 'Choose year'}) %>
+                    <br></br>
 
-    <%= f.submit %>
-<% end %>
+                    <%= f.submit %>
+                <% end %>
+            </div>
+            <div class="col-md-6">
+                <h4> Partner's </h4>
+                <h2><%= current_website.content.spouse_one %></h2>
+                <h2><%= current_website.content.spouse_two %></h2>
+            </div>
+        </div>
+    </div>

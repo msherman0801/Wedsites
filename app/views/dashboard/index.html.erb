@@ -1,36 +1,54 @@
-<html>
-    <head>
 
-    </head>
 
-</html>
+<div style="background:#ddedf9 !important" class="jumbotron">
+    <div class="container">
+        <h2 class="display-4">Hello, <%= current_user.first_name %>!</h2>
+        <% if current_user.image %>
+            <%= image_tag current_user.image %>
+        <% end %>
+        <p>Just like that, you are on your way to creating a beautiful website for a wedding! This dashboard has been designed
+        with simplicity in mind. If there is a feature you can think of that isn't already on here, I urge you to get in contact with
+        me at msherman0801@gmail.com.</p>
+        <hr>
+        <p class="mb-0">You can explore the full features of this application by creating a website below.</p>
+        <p class="lead">
+            <%= form_tag create_path, class: "form-group" do %>
+                <%= label_tag :key, "Wedding Name", class: "h3" %> <br />
+                <%= text_field_tag :key, "", class: "form-control form-control-lg", style: "width: 50%;" %> <br />
+                <!--<%= label_tag :uploads %>-->
+                <!--<%= file_field_tag :uploads, multiple: true %>-->
+                <%= submit_tag "Create a Website", class: "btn btn-primary btn-lg" %>
+            <% end %>
+        </p>
+    </div>
+</div>
 
+<div class="col-sm-12 col-md-12 well" id="content">
 
 <strong>Hello, <%= current_user.first_name %>! </strong> <br />
-<% if current_user.image %>
-<%= image_tag current_user.image %>
-<% end %>
 
-<% if @active_site %>
-    <h3>You're dashboard is currently loading <%= @active_site.name %>!</h3>
-<% end %>
-
-<h4>If you've built a website, it will appear below. Click on that website to manage it's settings.</h4>
-
-<%= form_tag create_path do %>
-    <%= label_tag "Wedding Name" %>
-    <%= text_field_tag :key %>
-    <%= label_tag :uploads %>
-    <%= file_field_tag :uploads, multiple: true %>
-    <%= submit_tag "Create a Website" %>
-<% end %>
-
+<div class="container">
 <% @websites.each do |w| %>
-    <ul>
-    <li><h2><%= link_to w.id, '/dashboard/home?' + {id: w.id}.to_param, method: :post %></h2></li>
-    <li><h4><%= link_to "Load website", website_path(w) %></h4></li>
-    </ul>
+    <div class="col-md-3" style="padding: 20px;">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title"><%= w.key %></h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <%= link_to "Site Settings", '/dashboard/home?' + {id: w.id}.to_param, class:"btn btn-sm btn-primary", method: :post %>
+                    </div>
+                    <div class="col-md-6">
+                        <%= link_to "Launch Website", website_path(w), class:"btn btn-sm btn-primary" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 <% end %>
+</div>
+</div>
 
 <% if current_user && current_user.uploads.attached? %>
     <% current_user.uploads.each do |image| %>

@@ -1,30 +1,41 @@
-<% if @content %>
-<%= @content.spouse_one %>
-<%= @content.spouse_two %>
-<% end %>
+    <div class="col-sm-12 col-md-12 well" id="content">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 style="margin-bottom: 1em;">Content for the Website.</h2>
+                <%= form_for(@content, class: "form-group") do |f| %>
+                    <%= f.label "Partner" %>
+                    <%= f.text_field :spouse_one, class: "form-control" %>
+                    <br></br>
+
+                    <%= f.label :partner %>
+                    <%= f.text_field :spouse_two, class: "form-control" %>
+                    <br></br>
 
 
-<%= form_for(@content) do |f| %>
-    <%= f.label "Partner" %>
-    <%= f.text_field :spouse_one %>
-    <br></br>
+                    <%= f.label "Write a summary" %>
+                    <%= f.text_area :summary, class: "form-control"%>
+                    <br></br>
 
-    <%= f.label :partner %>
-    <%= f.text_field :spouse_two %>
-    <br></br>
+                    <%= f.label :about_us %>
+                    <%= f.text_area :about_us, class: "form-control" %>
+                    <br></br>
 
+                    <%= f.label :datetime %>
+                    <%= datetime_select(:date, "written_on", prompt: {day: 'Choose day', month: 'Choose month', year: 'Choose year'}) %>
+                    <br></br>
 
-    <p>Write a short summary for the wedding!</p>
-    <%= f.text_area :summary %>
-    <br></br>
-
-    <%= f.label :about_us %>
-    <%= f.text_area :about_us %>
-    <br></br>
-
-    <%= f.label :datetime %>
-    <%= datetime_select(:date, "written_on", prompt: {day: 'Choose day', month: 'Choose month', year: 'Choose year'}) %>
-    <br></br>
-
-    <%= f.submit %>
-<% end %>
+                    <%= f.submit "Update Content", class: "btn btn-primary" %>
+                <% end %>
+            </div>
+            <div class="col-md-6">
+                <h3> Partner's </h3>
+                <h4><%= current_website.content.spouse_one %> & <%= current_website.content.spouse_two %></h4>
+                <hr>
+                <h3> Summary </h3>
+                <h4><%= current_website.content.summary %></h4>
+                <hr>
+                <h3> About the Couple </h3>
+                <h4><%= current_website.content.about_us %></h4>
+            </div>
+        </div>
+    </div>

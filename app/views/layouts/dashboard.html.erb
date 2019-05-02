@@ -1,11 +1,85 @@
-<div style="display: block;">
-<%= link_to "Dashboard", home_path %>
-<% if current_website %>
-    <%= link_to "Content", edit_content_path(current_website.content) %>
-    <%= link_to "Invitations", invitations_path %>
-    <%= link_to "Events", events_path %>
-    <%= link_to "Images", images_upload_path %>
-<% end %>
-<%= link_to "Logout", logout_path %>
-</div>
-<%= yield %>
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="/assets/strap.css" rel="stylesheet">
+</head>
+<!------ Include the above in your HEAD tag ---------->
+
+<body>
+    <div id="throbber" style="display:none; min-height:120px;"></div>
+    <div id="noty-holder"></div>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand img-responsive" href=<%=home_path%>>
+                    <img src="/assets/logo.png" alt="LOGO"">
+                </a>
+            </div>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">   
+            <li><a href=<%=website_path(current_website)%>><i class="fa fa-fw fa-arrow-up"></i>Launch Website</a></li>       
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin User <b class="fa fa-angle-down"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><i class="fa fa-fw fa-user"></i> Edit Profile</a></li>
+                        <li><a href="#"><i class="fa fa-fw fa-cog"></i> Change Password</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="fa fa-fw fa-power-off"></i> Logout</a></li>
+                    </ul>
+                    <li><a href=<%=logout_path%>><i class="fa fa-fw fa-user"></i>Logout</a></li>
+                </li>
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li>
+                        <a href=<%=home_path%>><i class="fa fa-fw fa-home"></i> Home </a>
+                    </li>
+                    <% if current_website %>
+                        <li>
+                            <a href=<%=edit_content_path(current_website.content)%>><i class="fa fa-fw fa-edit"></i> Content </a>
+                        </li>
+                        <li>
+                            <a href=<%=invitations_path%>><i class="fa fa-fw fa-envelope"></i> Invitations </a>
+                            <ul id="submenu-1">
+                                <!--<li class="text-secondary"><a href="#" class="text-secondary"><i class="fa fa-caret-right"></i>All Invitations</a></li>-->
+                                <!--<li><a href="#"><i class="fa fa-caret-right"></i> Invite More</a></li>-->
+                            </ul>
+                        </li>
+                        <li>
+                            <a href=<%=events_path%>><i class="fa fa-fw fa-calendar"></i> Events </a>
+                        </li>
+                        <li>
+                            <a href=<%=images_upload_path%>><i class="fa fa-fw fa-image"></i> Images </a>
+                        </li>
+                    <% end %>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <!-- Page Heading -->
+                <div class="row" id="main" >
+        
+                    <%= yield %>
+        
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+    </div><!-- /#wrapper -->
+</body>
+<script src="/assets/javascript/function.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
