@@ -1,6 +1,7 @@
 class ImagesController < DashboardController
 
     def index
+        @images = current_website.uploads
     end
 
     def new
@@ -9,13 +10,25 @@ class ImagesController < DashboardController
     end
 
     def create
-        current_website.update(params.permit(uploads: []))
-        redirect_to images_upload_path
+        current_website.upload(image_params)
+        redirect_to images_path
+    end
+
+    def show
+        @image = id(current_website.uploads)
     end
 
     def destroy
-
+        id(current_website.uploads).destroy
+        redirect_to images_path
     end
     
+    private
+
+    def image_params
+        params.require(:website).permit(uploads: [])
+    end
+
+
 
 end

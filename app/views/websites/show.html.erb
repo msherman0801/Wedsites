@@ -1,11 +1,70 @@
-<% if @website.user_id == current_user.id %>
-    <%= link_to "Go to Dashboard", home_path %>
-<% end %>
-
-<div style="margin-top: 3%;">
-    <%= render 'content' %>
+<div class="adminbar">
+    <% if (@website && current_user) && (@website.user_id == current_user.id) %>
+        <%= link_to "Go to Admin Dashboard", home_path, style: "font-size: 15px; color: white !important;" %>
+    <% end %>
+</div>
+<div class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <p>One fine body…</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="jumbotron parallax" style="background-image: url(/assets/layout1/apartment.jpg); background-size: cover; height: 600px; background-position: bottom;">
+  <br></br>
+    <center>
+    <h1 style="font-size: 100px; font-family: 'Parisienne', cursive;"><%= @website.content.spouse_one %> & <%= @website.content.spouse_two %></h1>
+    <h2><%= @website.content.date.to_s.split(" ").first %></h2>
+  <!--<p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>-->
+    <p><a href="#invitations" class="btn btn-info btn-lg" style="font-size: 12px; margin-top: 5%;">Accept an Invitation</a></p>
+  </center>
 </div>
 
-<div style="margin-top: 3%;">
+<div class="container d-flex justify-content-center text-center" style="margin-top: 8%;">
+    <div style="margin-top: 3%;">
+        <%= render 'content' %>
+    </div>
+</div>
+
+<div style="margin-top: 10%">
+    <div class="jumbotron parallax" style="background-image: url(/assets/layout1/bouqet.jpg); background-size: cover; height: 600px; background-position: top;">
+        <br></br>
+        <center><h1 style="font-size: 100px; font-family: 'Parisienne', cursive; color: white !important; margin-top: 10%;">Events</h1></center>
+    </div>
+</div>
+
+<div class="container" style="margin-top: 8%;">
     <%= render 'events' %>
+</div>
+
+<div style="margin-top: 10%">
+    <div class="jumbotron parallax" id="invitations" style="background-image: url(/assets/layout1/invitation.jpg); background-size: cover; height: 600px; background-position: top;">
+        <br></br>
+        <center><h1 style="font-size: 100px; font-family: 'Parisienne', cursive; color: white !important; margin-top: 10%;">Invitations</h1></center>
+    </div>
+</div>
+
+<div class="container d-flex justify-content-center" style="margin-top: 8%;">
+    <%= render 'invitations' %>
+</div>
+
+<div style="margin-top: 10%">
+    <div class="jumbotron parallax" style="background-image: url(/assets/layout1/photographer.jpg); background-size: cover; height: 600px; background-position: top;">
+        <br></br>
+        <center><h1 style="font-size: 100px; font-family: 'Parisienne', cursive; color: white !important; margin-top: 10%;">Photos</h1></center>
+    </div>
+</div>
+
+<div class="container" style="margin-top: 8%;">
+    <%= render 'images' %>
 </div>

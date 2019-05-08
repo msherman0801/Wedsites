@@ -7,6 +7,8 @@ class CreateContents < ActiveRecord::Migration[5.2]
       t.text :summary, default: "Summary"
       t.datetime :date, default: 000
       t.text :location, default: "Location"
+      t.text :contact_name, default: "Contact Name"
+      t.text :contact_number, default: "(111) 222-3333"
       t.text :registry_name, default: "Registry Name"
       t.string :registry_url, default: "Registry URL"
       t.integer :website_id

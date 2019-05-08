@@ -19,10 +19,22 @@
                     <%= f.label :about_us %>
                     <%= f.text_area :about_us, class: "form-control" %>
                     <br></br>
-
-                    <%= f.label :datetime %>
-                    <%= datetime_select(:date, "written_on", prompt: {day: 'Choose day', month: 'Choose month', year: 'Choose year'}) %>
+                    
+                    <%= f.label :location %>
+                    <%= f.text_field :location, class: "form-control" %>
                     <br></br>
+
+                    <%= f.label :contact_name %>
+                    <%= f.text_field :contact_number, class: "form-control" %>
+                    <br></br>
+
+                    <%= f.label :datetime, "Date of Wedding" %>
+                    <%= f.text_field :date, class: "form-control" %>
+                    <br></br>
+
+                    <!--<%= f.label :datetime %>
+                    <%= datetime_select(:date, "written_on", prompt: {day: 'Choose day', month: 'Choose month', year: 'Choose year'}) %>
+                    <br></br>-->
 
                     <%= f.submit "Update Content", class: "btn btn-primary" %>
                 <% end %>

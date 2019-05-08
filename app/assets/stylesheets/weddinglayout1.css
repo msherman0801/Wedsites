@@ -1,0 +1,15 @@
+h1 {
+    color: rgb(63, 39, 39) !important;
+}
+
+h2,h3,h4,h5,h6{
+    color: rgb(63, 39, 39) !important;
+}
+
+p {
+    font-size: 18px !important;
+}
+
+body {
+    background-color: #fff9f9 !important;
+}

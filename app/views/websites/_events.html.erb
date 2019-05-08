@@ -1,7 +1,30 @@
-<% @website.events.each do |event| %>
-    <%= event.title %>
-    <%= event.description %>
-    <%= event.date %>
-    <%= event.location %>
-    <%= event.attire %>
-<% end %>
+<div class="row">
+    <% if !@website.events.empty? %>
+        <% @website.events.each do |event| %>
+            <div class="col-md-4">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h2><%= event.title %></h2>
+                    </div>
+                    <div class="panel-body">
+                        <p class="panel-paragraph">Description</p>
+                        <p><%= event.description %></p>
+                        <p class="panel-paragraph">Date</p>
+                        <p><small><%= event.date %></small></p>
+                        <p class="panel-paragraph">Location</p>
+                        <p> <%= event.location %></p>
+                        <p class="panel-paragraph">Attire</p>
+                        <p><%= event.attire %></p>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+    <% else %>
+        <div class="col-md-12">
+            <center> 
+                <h1>There are no events yet!</h1>
+            </center>
+        </div>
+    <% end %>
+</div>
+

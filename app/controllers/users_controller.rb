@@ -5,9 +5,15 @@ class UsersController < ApplicationController
     end
 
     def create
-        user = User.create(user_params(:username, :password, :first_name, :last_name, uploads: []))
-        session_save(1, user)
-        redirect_to_dash
+        user = User.create(user_params(:username, :password, :first_name, :last_name, :email))
+        if user.valid?
+            session_save(1, user)
+            redirect_to_dash
+        else
+            @user = User.new
+            @messages = user.errors.full_messages
+            render 'users/new'
+        end
     end
 
     def signin
@@ -34,20 +40,7 @@ class UsersController < ApplicationController
           end
         session_save(1, @user)
         redirect_to_dash
-    end
-
-    # def fblogin
-    #     @user = User.find_by(uid: auth['uid'])
-    #     if !@user
-    #         name = auth['info']['name'].split(' ')
-    #         username = "#{name[0]+name[1]}"+"#{rand(+100000)}"
-    #         @user = User.create(username: username, first_name: name[0], last_name: name[1], email: auth['info']['email'], image: auth['info']['image'], uid: auth[:uid])
-    #     end
-    #     session_save(1, @user)
-    
-    #     render '/testpage'
-    # end
-        
+    end 
 
     def logout
         session.destroy

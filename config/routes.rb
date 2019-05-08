@@ -10,17 +10,19 @@ Rails.application.routes.draw do
   get '/auth/facebook/callback' => 'users#fblogin'
 
   resources :users, only: [:new, :create, :edit, :update, :show]
-  resources :websites, only: [:index, :show]
+  resources :websites, only: [:index, :create, :show, :edit, :update] do 
+    get '/image/:id' => 'websites#image', as: "image"
+    post '/invitations' => 'websites#search'
+  end
   
   scope :dashboard, path: '/dashboard' do
     get 'home'  => 'dashboard#index'
     post 'home' => 'dashboard#index'
     post 'create' => 'dashboard#create'
-    get 'images/upload' => 'images#new'
-    post 'images/upload' => 'images#create'
+    resources :images, only: [:index, :new, :create, :show, :destroy]
     resources :contents, only: [:index, :edit, :update]
-    resources :invitations
-    resources :events
+    resources :invitations, only: [:index, :new, :create, :update, :destroy]
+    resources :events, only: [:index, :new, :edit, :create, :show, :update, :destroy]
   end
 
   

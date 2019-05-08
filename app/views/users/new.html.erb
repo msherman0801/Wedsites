@@ -1,19 +1,58 @@
-<%= form_for(@user) do |f| %>
-    <%= f.label :username %>
-    <%= f.text_field :username %>
 
-    <%= f.label :password %>
-    <%= f.text_field :password %>
+<body class="welcome">
+    <div>
+        <div class="d-flex justify-content-center" style="margin-top: 8%;">
+            <div class="row">
 
-    <%= f.label :first_name %>
-    <%= f.text_field :first_name %>
+                <div class="col-md-12 d-flex justify-content-center">  
+                    <%= image_tag("/assets/logo2.png") %>
+                </div>
 
-    <%= f.label :last_name %>
-    <%= f.text_field :last_name %>
+                <div class="col-md-12">
+                    
+                        <center>
 
-    <%= f.label :uploads %>
-    <%= f.file_field :uploads, multiple: true %>
+                            <% if @messages %>
+                                <div id="error_explanation">
+                                    <h2 class="text-danger">
+                                    Uh oh! It seems there was a problem
+                                    creating your account!
+                                    </h2>
+                                
+                                    <ul>
+                                    <% @messages.each do |msg| %>
+                                    <li class="text-danger" style="font-size: 12px;"><%= msg %></li>
+                                    <% end %>
+                                    </ul>
+                                </div>
+                            <% end %>
+                                
+                            <%= form_for(@user, class:"form-group") do |f| %>
+                                <div style="width: 50%;">
+                                <%= f.label :username, style: "font-size: 15px;" %>
+                                <%= f.text_field :username, class: 'form-control' %>
+                            
+                                <%= f.label :password, style: "font-size: 15px;" %>
+                                <%= f.text_field :password, class: 'form-control' %>
+                            
+                                <%= f.label :first_name, style: "font-size: 15px;" %>
+                                <%= f.text_field :first_name, class: 'form-control' %>
+                            
+                                <%= f.label :last_name, style: "font-size: 15px;" %>
+                                <%= f.text_field :last_name, class: 'form-control' %>
 
-    <%= f.submit %>
-<% end %>
+                                <%= f.label :email, style: "font-size: 15px;" %>
+                                <%= f.text_field :email, class: 'form-control' %>
+                                <br />
+                                <%= f.submit "Create User", class: "btn btn-info btn-lg" %>
+                                <%= link_to "Login", login_path, class: 'btn btn-lg' %>
+                                </div>
+                                <% end %>
+                        </center>
+                        
+                </div>
 
+            </div>
+        </div>
+    </div>
+</body>

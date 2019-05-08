@@ -1,12 +1,37 @@
-<%= form_for :user do |f| %>
-    <%= f.label :username %>
-    <%= f.text_field :username %>
+<body class="welcome">
+    <div>
+        <div class="d-flex justify-content-center" style="margin-top: 8%;">
+            <div class="row">
 
-    <%= f.label :password %>
-    <%= f.password_field :password, id: "password" %>
-    <%= f.submit "login" %>
-<% end %>
+                <div class="col-md-12 d-flex justify-content-center">  
+                    <%= image_tag("/assets/logo2.png") %>
+                </div>
 
-<%= link_to('Log in with Facebook!', '/auth/facebook') %>
+                <div class="col-md-12">
+                <center>
+                    <%= form_for(:user, class: 'form-group') do |f| %>
+                        <div style="width: 40%;">
+                            <%= f.label :username, style: "font-size: 15px;" %>
+                            <%= f.text_field :username, class: 'form-control' %>
+                            <br></br>
+                            <%= f.label :password, style: "font-size: 15px;" %>
+                            <%= f.password_field :password, id: "password", class: 'form-control' %>
+                            <br></br>
+                            <%= f.submit "Login", class: 'btn btn-info btn-lg' %>
+                            <%= link_to "Register", new_user_path, class: 'btn btn-lg' %>
+                        </div>
+                    <% end %>
+                </center>
+                </div>
 
-<%= link_to "Sign Up", new_user_path %>
+                <div class="col-md-12">
+                <center>
+                    <%= link_to image_tag("/assets/layout1/facebook.png", width: "100px;"), '/auth/facebook' %>
+                    <%= link_to "Login with Facebook", '/auth/facebook' %>
+                </center>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>

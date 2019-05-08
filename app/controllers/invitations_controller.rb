@@ -3,7 +3,7 @@ class InvitationsController < DashboardController
 
     def index
         @invitation = Invitation.new
-        @invitations = current_website.invitations
+        @invitations = current_website.invitations.sort_by{|i| i.last_name }
     end
 
     def create
@@ -14,6 +14,11 @@ class InvitationsController < DashboardController
 
     def show
         @invitation = Invitation.find_by(invitation_params(:id))
+    end
+
+    def delete
+        id(Invitation).destroy
+        redirect_to invitations_path
     end
 
     private

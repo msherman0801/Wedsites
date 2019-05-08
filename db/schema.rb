@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 2019_04_26_153359) do
     t.text "summary", default: "Summary"
     t.datetime "date"
     t.text "location", default: "Location"
+    t.text "contact_name", default: "Contact Name"
+    t.text "contact_number", default: "(111) 222-3333"
     t.text "registry_name", default: "Registry Name"
     t.string "registry_url", default: "Registry URL"
     t.integer "website_id"
@@ -60,9 +62,10 @@ ActiveRecord::Schema.define(version: 2019_04_26_153359) do
 
   create_table "invitations", force: :cascade do |t|
     t.datetime "date_responded"
-    t.boolean "accepted"
+    t.boolean "attending"
     t.string "first_name"
     t.string "last_name"
+    t.string "role"
     t.integer "guests"
     t.text "allergies"
     t.integer "website_id"

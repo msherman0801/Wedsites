@@ -3,5 +3,10 @@ class User < ApplicationRecord
     has_many :websites
     has_many :invitations, through: :websites
     has_many :events, through: :websites
-    has_many_attached :uploads
+
+    validates :email, uniqueness: true
+    validates :username, presence: true
+    validates :first_name, presence: true
+    validates :last_name, presence: true
+    validates(:password, { :length => { :in => 6..20 } })
 end

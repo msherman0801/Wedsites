@@ -1,21 +1,21 @@
-<%= form_for(@event) do |f| %>
+<%= form_for(@event, class: "form-group") do |f| %>
     <%= f.label :title %>
-    <%= f.text_field :title %>
-
+    <%= f.text_field :title, class: "form-control", required: "required" %>
+    <br />
     <%= f.label :description %>
-    <%= f.text_area :description %>
-
+    <%= f.text_area :description, class: "form-control", required: "required" %>
+    <br />
     <%= f.label :date %>
-    <%= f.text_field :date %>
-
-    <%= f.label :date %>
+    <%= f.text_field :date, class: "form-control", required: "required" %>
+    <br />
+    <!--<%= f.label :date %>
     <%= datetime_select("article", "written_on", prompt: {hour: true}) %>
-
+    <br></br>-->
     <%= f.label :location %>
-    <%= f.text_field :location %>
-
+    <%= f.text_field :location, class: "form-control", required: "required" %>
+    <br />
     <%= f.label :attire %>
-    <%= f.select :attire, options_for_select(["Formal", "Non-Formal"]) %>
-
-    <%= f.submit %>
+    <%= f.select :attire, options_for_select(["Formal", "Non-Formal"]), required: "required" %>
+    <br></br>
+    <%= f.submit class: "btn btn-primary" %>
 <% end %>

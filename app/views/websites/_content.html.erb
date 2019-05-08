@@ -1,5 +1,26 @@
-<div>
-    <%= @website.content.spouse_one %> <%= @website.content.spouse_two %> <br />
-    <%= @website.content.summary %> <br />
-    <%= @website.content.about_us %>
+
+<h1>The wedding of</h1>
+<h1 style="font-size: 40px;"><%= @website.content.spouse_one %> and <%= @website.content.spouse_two %></h1>
+
+<div style="margin-top: 80px">
+    <h3>About</h3>
+    <h1><%= @website.content.about_us %></h1>
+</div>
+
+<div style="margin-top: 80px">
+    <h3>When</h3>
+    <h1><%= @website.content.date %></h1>
+</div>
+
+<div style="margin-top: 80px">
+    <h3>Where</h3>
+    <h1><%= @website.content.location %></h1>
+    <h3>Drections:</h3>
+    <h2><%= @website.content.summary %></h2>
+</div>
+
+<div style="margin-top: 80px">
+    <h3>Contact Information</h3>
+    <h1><%= @website.content.contact_name %></h1>
+    <h1><%= @website.content.contact_number %></h1>
 </div>

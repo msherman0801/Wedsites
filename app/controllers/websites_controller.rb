@@ -8,9 +8,38 @@ class WebsitesController < ApplicationController
         @website = id(Website)
     end
 
-    def photo
+    def create
+        website = current_user.websites.create(website_params)
+        session_save(2, website)
+        current_website.content = Content.create
+        redirect_to home_path
     end
 
-    def upload
+    def image
+        @image = Website.find(6).uploads.find(12)
     end
+
+    def search
+        invitations = id(Website).invitations
+        @results = invitations.find_by(search_params)
+        @website = id(Website)
+        render 'websites/results'
+    end
+
+    def update
+        invitation = Invitation.find(params[:invitation])
+        invitation.update(params.permit(:attending, :guests, :allergies))
+        redirect_to website_path(id(Website))
+    end
+
+    private
+
+    def website_params
+        params.require(:website).permit(:key, uploads: [])
+    end
+
+    def search_params
+        params.permit(:first_name, :last_name)
+    end
+
 end

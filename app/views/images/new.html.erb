@@ -1,13 +1,9 @@
-<%= form_tag :website, url: images_upload_path do |f| %>
-    <%= label_tag :uploads %>
-    <%= file_field_tag :uploads, multiple: true %>
-    <%= submit_tag "Upload Photo" %>
-<% end %>
-
-<% if @images.attached? %>
-    <% @images.each do |image| %>
-        <%= image_tag(image, width: 200) %>
-    <% end %>
-<% else %>
-    <p>no uploads</p>
-<% end %>
+<div class="col-sm-12 col-md-12 well" id="content">
+    <center>
+        <%= form_for(current_website, url: images_path, method: :post) do |f| %>
+            <%= f.label :uploads %>
+            <%= f.file_field :uploads, multiple: true%>
+            <%= f.submit "Upload Photo", class: "btn btn-primary" %>
+        <% end %>
+    </center>
+</div>

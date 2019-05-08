@@ -1,0 +1,15 @@
+<div class="row">
+    <% if @website.uploads.attached? %>
+        <% @website.uploads.each do |image| %>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb" style="margin-bottom: 5%;">
+                <a href=<%=website_image_path(image)%>><%= image_tag(image, width: '100%', style: 'max-height: 200px; border: 1px solid #000000;', class: 'img-responsive') %></a>
+            </div>
+        <% end %>
+    <% else %>
+        <div class="col-md-12">
+            <center> 
+                <h1>There are no photos yet!</h1>
+            </center>
+        </div>
+    <% end %>
+</div>

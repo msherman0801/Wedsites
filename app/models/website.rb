@@ -4,4 +4,8 @@ class Website < ApplicationRecord
     has_many :invitations
     has_many :events
     has_many_attached :uploads
+
+    def upload(params)
+        self.update(params)
+    end
 end

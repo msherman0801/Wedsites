@@ -11,7 +11,7 @@ class EventsController < DashboardController
     def create
         event = Event.create(event_params)
         current_website.events << event
-        redirect_to event_path(event)
+        redirect_to events_path
     end
     
     def show
@@ -26,7 +26,12 @@ class EventsController < DashboardController
         event = id(Event)
         event.update(event_params)
         event.save
-        redirect_to event_path(event)
+        redirect_to events_path
+    end
+
+    def destroy
+        id(current_website.events).destroy
+        redirect_to events_path
     end
 
     private

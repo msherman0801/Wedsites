@@ -1,15 +1,15 @@
 <head>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
+    <link href="/assets/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/strap.css" rel="stylesheet">
 </head>
-<!------ Include the above in your HEAD tag ---------->
 
 <body>
     <div id="throbber" style="display:none; min-height:120px;"></div>
     <div id="noty-holder"></div>
     <div id="wrapper">
         <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-color: #212121 !important">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -22,12 +22,13 @@
                     <img src="/assets/logo.png" alt="LOGO"">
                 </a>
             </div>
-            <!-- Top Menu Items -->
-            <ul class="nav navbar-right top-nav">   
-            <li><a href=<%=website_path(current_website)%>><i class="fa fa-fw fa-arrow-up"></i>Launch Website</a></li>       
+
+            <ul class="nav navbar-right top-nav"> 
+            <% if current_website %>
+                <li><a href=<%=website_path(current_website)%>><i class="fa fa-fw fa-arrow-up"></i>Launch Website</a></li>  
+            <% end %>     
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin User <b class="fa fa-angle-down"></b></a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu" aria-labelledby="dropdown-menu">
                         <li><a href="#"><i class="fa fa-fw fa-user"></i> Edit Profile</a></li>
                         <li><a href="#"><i class="fa fa-fw fa-cog"></i> Change Password</a></li>
                         <li class="divider"></li>
@@ -36,7 +37,6 @@
                     <li><a href=<%=logout_path%>><i class="fa fa-fw fa-user"></i>Logout</a></li>
                 </li>
             </ul>
-            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>
@@ -48,21 +48,26 @@
                         </li>
                         <li>
                             <a href=<%=invitations_path%>><i class="fa fa-fw fa-envelope"></i> Invitations </a>
-                            <ul id="submenu-1">
-                                <!--<li class="text-secondary"><a href="#" class="text-secondary"><i class="fa fa-caret-right"></i>All Invitations</a></li>-->
-                                <!--<li><a href="#"><i class="fa fa-caret-right"></i> Invite More</a></li>-->
-                            </ul>
+                            <!--<ul id="submenu-1">
+                                <li class="text-secondary"><a href="#" class="text-secondary"><i class="fa fa-caret-right"></i>All Invitations</a></li>
+                                <li><a href="#"><i class="fa fa-caret-right"></i> Invite More</a></li>
+                            </ul>-->
                         </li>
                         <li>
                             <a href=<%=events_path%>><i class="fa fa-fw fa-calendar"></i> Events </a>
+                            <ul id="submenu-1">
+                                <li><a style="color: grey !important;" href=<%=new_event_path%>><i class="fa fa-caret-right" style="padding-right: 5px;"></i>New Event</a></li>
+                            </ul>
                         </li>
                         <li>
-                            <a href=<%=images_upload_path%>><i class="fa fa-fw fa-image"></i> Images </a>
+                            <a href=<%=images_path%>><i class="fa fa-fw fa-image"></i> Images </a>
+                            <!--<ul id="submenu-2">
+                                <li><a style="color: grey !important;" href=<%=new_image_path%>><i class="fa fa-caret-right" style="padding-right: 5px;"></i>Upload Images</a></li>
+                            </ul>-->
                         </li>
                     <% end %>
                 </ul>
             </div>
-            <!-- /.navbar-collapse -->
         </nav>
 
         <div id="page-wrapper">
@@ -73,13 +78,13 @@
                     <%= yield %>
         
                 </div>
-                <!-- /.row -->
             </div>
-            <!-- /.container-fluid -->
         </div>
-        <!-- /#page-wrapper -->
-    </div><!-- /#wrapper -->
+    </div>
 </body>
-<script src="/assets/javascript/function.js"></script>
+
+
+<script src="/app/assets/javascripts/function.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/app/assets/javascripts/boostrap/bootstrap.min.js"></script>

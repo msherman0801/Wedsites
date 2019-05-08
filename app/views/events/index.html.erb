@@ -1,10 +1,26 @@
-<%= link_to "New Event", new_event_path %>
 
-<% @events.each do |i| %>
-    <li>
-    <%= link_to i.title, event_path(i) %>
-    <%= i.description %>
-    <%= i.location %>
-    <%= i.date %>
-    </li>
-<% end %>
+<div class="col-sm-12 col-md-12 well" id="content">
+    <h2 style="margin-bottom: 1em;">Events</h2>
+    <center>
+        <%= link_to 'New Event', new_event_path, class: "btn btn-primary btn-lg" %>
+    </center><br></br>
+    <div class="row">
+        <% @events.each do |i| %>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb" style="margin-bottom: 5%;">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h3><%= link_to i.title, edit_event_path(i) %></h3>
+                        <p style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><%= i.description %></p>
+                        <p><%= i.location %></p>
+                        <p><%= i.date %></p>
+                        <%= form_for(i, method: :delete) do |f| %>
+                        <p><a href=<%= edit_event_path(i) %> class="btn btn-primary" role="button">Edit</a>
+                            <%= f.submit "Delete", class: "btn btn-danger" %>
+                        </p>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>
