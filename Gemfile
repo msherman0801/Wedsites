@@ -16,6 +16,7 @@ gem 'dotenv-rails'
 gem 'thin'
 gem 'bootstrap'
 gem 'jquery-rails'
+gem 'rails_12factor'
 # Binding.pry
 gem 'pry'
 # Hashing passwords and encryption

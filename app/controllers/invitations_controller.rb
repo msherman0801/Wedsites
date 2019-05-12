@@ -3,7 +3,7 @@ class InvitationsController < DashboardController
 
     def index
         @invitation = Invitation.new
-        @invitations = current_website.invitations.sort_by{|i| i.last_name }
+        @invitations = current_website.invitations.order('last_name ASC')
     end
 
     def create

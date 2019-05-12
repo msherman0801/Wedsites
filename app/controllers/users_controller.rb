@@ -21,11 +21,16 @@ class UsersController < ApplicationController
     end
 
     def login
-        return redirect_to 'login' if !user_params(:username).present? || !user_params(:password).present?
+        redirect_to 'login' if !user_params(:username).present? || !user_params(:password).present?
         user = User.find_by(user_params(:username))
-        return redirect_to '/login' if !user
+        if user.password == user_params(:password)
+            session_save(1, user)
+            redirect_to_dash
+        else
+            redirect_to '/login' if !user
+        end
         session_save(1, user)
-        redirect_to_dash
+            redirect_to_dash
     end
 
     def fblogin
