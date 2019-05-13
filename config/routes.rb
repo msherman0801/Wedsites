@@ -1,20 +1,26 @@
 Rails.application.routes.draw do
-
+  
+  # Root Route
   root 'welcome#index'
 
-  # User Routes
+  # Session Routes
   get 'login' => 'users#signin'
   post 'login' => 'users#login'
   get 'logout' => 'users#logout'
 
+  # OAuth Routes
   get '/auth/facebook/callback' => 'users#fblogin'
-
+  
+  # User Routes
   resources :users, only: [:new, :create, :edit, :update, :show]
+
+  # Public Website Routes
   resources :websites, only: [:index, :create, :show, :edit, :update] do 
     get '/image/:id' => 'websites#image', as: "image"
     post '/invitations' => 'websites#search'
   end
   
+  # Admin Dashboard
   scope :dashboard, path: '/dashboard' do
     get 'home'  => 'dashboard#index'
     post 'home' => 'dashboard#index'
@@ -25,6 +31,4 @@ Rails.application.routes.draw do
     resources :events, only: [:index, :new, :edit, :create, :show, :update, :destroy]
   end
 
-  
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

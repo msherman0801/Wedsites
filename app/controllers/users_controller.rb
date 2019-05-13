@@ -21,28 +21,17 @@ class UsersController < ApplicationController
     end
 
     def login
-        redirect_to 'login' if !user_params(:username).present? || !user_params(:password).present?
         user = User.find_by(user_params(:username))
-        if user.password == user_params(:password)
+        if user && user.authenticate(params[:user][:password])
             session_save(1, user)
             redirect_to_dash
         else
-            redirect_to '/login' if !user
+            redirect_to '/login'
         end
-        session_save(1, user)
-            redirect_to_dash
     end
 
     def fblogin
-        @user = User.find_or_create_by(uid: auth['uid']) do |u|
-            name = auth['info']['name'].split(' ')
-            u.username = "#{name[0]+name[1]}"+"#{rand(+100000)}" if u.username.nil?
-            u.password = "#{rand(+100000000000000)}"
-            u.first_name = auth['info']['name'].split(' ')[0]
-            u.last_name = auth['info']['name'].split(' ')[1]
-            u.email = auth['info']['email']
-            u.image = auth['info']['image']
-          end
+        @user = User.fb_login(auth)
         session_save(1, @user)
         redirect_to_dash
     end 
@@ -52,6 +41,8 @@ class UsersController < ApplicationController
         redirect_to :root
     end
 
+
+    
     private
 
     def user_params(*args)

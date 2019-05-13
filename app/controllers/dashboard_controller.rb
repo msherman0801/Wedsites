@@ -3,6 +3,7 @@ class DashboardController < ApplicationController
     layout "dashboard"
 
     def index
+        binding.pry
         @website = Website.new
         @websites = current_user.websites
         session[:website_id] = params[:id] if params[:id]
