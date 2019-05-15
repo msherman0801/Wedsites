@@ -26,7 +26,8 @@ class UsersController < ApplicationController
             session_save(1, user)
             redirect_to_dash
         else
-            redirect_to '/login'
+            @error = "The username or password you typed in is incorrect."
+            render 'users/signin'
         end
     end
 

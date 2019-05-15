@@ -9,6 +9,7 @@
 
                 <div class="col-md-12">
                 <center>
+                <h3 class="text-danger"><%= @error if @error %></h3>
                     <%= form_for(:user, class: 'form-group') do |f| %>
                         <div style="width: 40%;">
                             <%= f.label :username, style: "font-size: 15px;" %>
