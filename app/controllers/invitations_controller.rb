@@ -20,13 +20,13 @@ class InvitationsController < DashboardController
     end
 
     def show
-        binding.pry
         @invitation = Invitation.find_by(invitation_params(:id))
     end
 
     def edit
         @website = Website.find(params[:website_id]) #using params[:website_id] because user may not be logged in
         @invitation = Invitation.find_by(invitation_params(:id))
+        render :layout => "websites/layout1"
     end
 
     def update

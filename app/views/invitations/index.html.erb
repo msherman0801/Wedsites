@@ -1,17 +1,21 @@
-<div class="d-flex justify-content-center" style="margin-top: 5%;">
-    <div class="row">
-        <div class="col-md-12">
-            <% if !@invitations %>
-                <h1>No invitations found!</h1><br />
-                <%= link_to "Go Back", website_path(@website), class: 'btn btn-lg btn-primary' %>
-            <% else %>
-                <% @invitations.each do |i| %>
-                    <h6>Invitation For</h6><h2>
-                    <%= "#{i.first_name} #{i.last_name}" %></h2>
-                    <br />
-                    <%= link_to "Open", edit_website_invitation_path(@website, i), class: 'btn btn-info' %>
-                <% end %>
-            <% end %>
+<center>
+    <div class="container">
+        <div class="d-flex justify-content-center" style="margin-top: 5%;">
+            <div class="row">
+                <div class="col-md-12">
+                    <% if !@invitations %>
+                        <h1>No invitations found!</h1><br />
+                        <%= link_to "Go Back", website_path(@website), class: 'btn btn-lg btn-primary' %>
+                    <% else %>
+                        <% @invitations.each do |i| %>
+                            <h2><%= "#{i.first_name} #{i.last_name}" %></h2>
+                            <%= link_to "Open Invitation", edit_website_invitation_path(@website, i), class: 'btn btn-sm btn-info' %>
+                            <hr style="width: 5%; border-bottom: 2px solid grey;">
+                            <br />
+                        <% end %>
+                    <% end %>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+</center>
