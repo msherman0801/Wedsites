@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   # Root Route
   root 'welcome#index'
 
@@ -16,8 +16,9 @@ Rails.application.routes.draw do
 
   # Public Website Routes
   resources :websites, only: [:index, :create, :show, :edit, :update] do 
+    resources :invitations
     get '/image/:id' => 'websites#image', as: "image"
-    post '/invitations' => 'websites#search'
+    #post '/invitations' => 'websites#search'
   end
   
   # Admin Dashboard
@@ -27,7 +28,7 @@ Rails.application.routes.draw do
     post 'create' => 'dashboard#create'
     resources :images, only: [:index, :new, :create, :show, :destroy]
     resources :contents, only: [:index, :edit, :update]
-    resources :invitations, only: [:index, :new, :create, :update, :destroy]
+    resources :invitations, only: [:new, :create, :destroy]
     resources :events, only: [:index, :new, :edit, :create, :show, :update, :destroy]
   end
 

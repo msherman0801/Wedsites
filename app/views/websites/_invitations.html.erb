@@ -1,9 +1,9 @@
 <div class="row">
-    <%= form_tag website_invitations_path(@website) do %>
+    <%= form_tag website_invitations_path(@website), method: :get do %>
         <center>>
 
         <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-        <%= hidden_field_tag :id, @website.id %>
+        <%= hidden_field_tag :website_id, @website.id %>
         <h2 style="font-size: 30px;font-family: 'Parisienne', cursive;">Search and respond to your invitation by searching your name below.</h2>
         <br></br>
 

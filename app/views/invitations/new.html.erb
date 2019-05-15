@@ -1,0 +1,53 @@
+<div class="col-sm-12 col-md-12 well" id="content">
+<div class="row">
+    <div class="col-md-6">
+            <h2 style="margin-bottom: 1em;">Invitations</h2>
+                <%= form_tag(@invitation, class: "form-group", style: "width: 80%;") do %>
+                    <%= label_tag :first_name %>
+                    <%= text_field_tag :first_name, "", class: "form-control" %>
+                    <br />
+                    <%= label_tag :last_name %>
+                    <%= text_field_tag :last_name, "", class: "form-control" %>
+                    <br />
+                    <%= submit_tag "Add Invitation", class: "btn btn-primary" %>
+                <% end %>
+            </div>
+            <div class="col-sm-6"> 
+                <% if !@invitations.empty? %>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Date Responded</th>
+                                <th scope="col">Attending?</th>
+                                <th scope="col">Guests</th>
+                                <th scope="col">Allergies</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% @invitations.each do |i| %>
+                            <tr>
+                                <th><%= link_to "Open Invitation", invitation_path(i), class: "h6" %></th>
+                                <td><%= "#{i.first_name}" %></td>
+                                <td><%= "#{i.last_name}" %></td>
+                                <td><%= i.date_responded %></td>
+                                    <% if i.attending == true %>
+                                        <td class="text-success">Yes</td>
+                                    <% elsif i.attending == false %>
+                                        <td class="text-danger">No</td>
+                                    <% else %>
+                                        <td></td>
+                                    <% end %>
+                                <td><%= i.guests %></td>
+                                <td><%= i.allergies %></td>
+                            </tr>
+                        <% end %>
+                        </tbody>
+                    </table>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

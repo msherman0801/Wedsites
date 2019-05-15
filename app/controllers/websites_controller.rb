@@ -19,6 +19,10 @@ class WebsitesController < ApplicationController
         @image = Website.find(6).uploads.find(12)
     end
 
+    def update
+        binding.pry
+    end
+
     def search
         invitations = id(Website).invitations
         @results = invitations.find_by(search_params)
@@ -26,11 +30,6 @@ class WebsitesController < ApplicationController
         render 'websites/results'
     end
 
-    def update
-        invitation = Invitation.find(params[:invitation])
-        invitation.update(params.permit(:attending, :guests, :allergies))
-        redirect_to website_path(id(Website))
-    end
 
     private
 

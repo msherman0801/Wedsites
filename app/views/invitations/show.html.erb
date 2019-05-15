@@ -1,8 +1,13 @@
-<li><%= @invitation.first_name %></li>
-<li><%= @invitation.last_name %></li>
-<li><%= @invitation.attending %></li>
-<li><%= @invitation.date_responded %></li>
-<li><%= @invitation.guests %></li>
-<li><%= @invitation.allergies %></li>
-
-<div class="col-sm-12 col-md-12 well" id="content">
+<div class="d-flex justify-content-center" style="margin-top: 5%;">
+    <div class="row">
+        <div class="col-md-12">
+            <% if !@invitation %>
+                <h1>No invitation found!</h1><br />
+                <%= link_to "Go Back", website_path(@website), class: 'btn btn-lg btn-primary' %>
+            <% else %>
+            <h1>Invitation For</h1><br />
+            <%= link_to "#{@invitiation.first_name} #{@invitation.last_name}", invitation_path(@invitation), class: 'btn btn-lg btn-primary' %>
+            <% end %>
+        </div>
+    </div>
+</div>
