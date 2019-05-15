@@ -4,7 +4,7 @@ class InvitationsController < DashboardController
 
     def index
         @website = Website.find(params[:website_id]) #using params[:website_id] because user may not be logged in
-        @invitations = Invitation.where(invitation_params(:first_name, :last_name))
+        @invitations = @website.invitations.where(invitation_params(:first_name, :last_name))
         render :layout => "websites/layout1"
     end
 
@@ -16,7 +16,7 @@ class InvitationsController < DashboardController
     def create
         invite = Invitation.create(invitation_params(:first_name, :last_name))
         current_website.invitations << invite
-        redirect_to invitations_path
+        redirect_to new_invitation_path
     end
 
     def show

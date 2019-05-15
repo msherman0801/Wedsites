@@ -8,9 +8,8 @@
     <%= f.label :date %>
     <%= f.text_field :date, class: "form-control", required: "required" %>
     <br />
-    <!--<%= f.label :date %>
-    <%= datetime_select("article", "written_on", prompt: {hour: true}) %>
-    <br></br>-->
+    <%= f.collection_check_boxes :invitation_ids, @invitations.all, :id, :full_name %>
+    <br />
     <%= f.label :location %>
     <%= f.text_field :location, class: "form-control", required: "required" %>
     <br />

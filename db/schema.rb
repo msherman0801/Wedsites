@@ -91,6 +91,8 @@ ActiveRecord::Schema.define(version: 2019_04_26_153359) do
     t.string "key"
     t.integer "user_id"
     t.string "image"
+    t.string "event_id"
+    t.string "invitation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

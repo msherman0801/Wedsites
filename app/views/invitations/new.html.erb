@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-md-6">
             <h2 style="margin-bottom: 1em;">Invitations</h2>
-                <%= form_tag(@invitation, class: "form-group", style: "width: 80%;") do %>
+                <%= form_tag(@invitation, action: :post, class: "form-group", style: "width: 80%;") do %>
                     <%= label_tag :first_name %>
                     <%= text_field_tag :first_name, "", class: "form-control" %>
                     <br />
@@ -29,7 +29,7 @@
                         <tbody>
                         <% @invitations.each do |i| %>
                             <tr>
-                                <th><%= link_to "Open Invitation", invitation_path(i), class: "h6" %></th>
+                                <th><%= link_to "Open Invitation", website_invitations_path(current_website, i), class: "h6" %></th>
                                 <td><%= "#{i.first_name}" %></td>
                                 <td><%= "#{i.last_name}" %></td>
                                 <td><%= i.date_responded %></td>

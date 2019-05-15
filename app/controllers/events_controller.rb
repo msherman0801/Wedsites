@@ -6,6 +6,7 @@ class EventsController < DashboardController
 
     def new
         @event = Event.new
+        @invitations = current_website.invitations
     end
     
     def create
@@ -20,6 +21,7 @@ class EventsController < DashboardController
 
     def edit
         @event = id(Event)
+        @invitations = current_website.invitations
     end
 
     def update
