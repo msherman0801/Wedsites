@@ -8,6 +8,8 @@ ruby '2.5.1'
 gem 'rails', '~> 5.2.3'
 # Postgres
 gem 'pg'
+# Foreman
+gem 'foreman'
 gem "database_cleaner"
 gem 'rspec-rails'
 gem 'omniauth'
