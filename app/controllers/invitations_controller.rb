@@ -10,7 +10,7 @@ class InvitationsController < DashboardController
 
     def new
         @invitation = Invitation.new
-        @invitations = current_website.invitations.order('last_name ASC')
+        @invitations = current_website.invitations.website_invitations
     end
 
     def create
@@ -30,7 +30,10 @@ class InvitationsController < DashboardController
     end
 
     def update
-        binding.pry
+        inv = Invitation.find_by(invitation_params(:id))
+        inv.update(invitation_params(:attending, :guests, :allergies))
+        website = Website.find(params[:website_id])
+        redirect_to website_path(website)
     end
 
     def delete

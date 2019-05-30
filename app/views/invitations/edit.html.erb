@@ -8,7 +8,7 @@
                 </div>
             <% else %>
                 <div class="col-md-12">
-                    <%= form_for :invitation, action: website_invitation_path(@invitation), method: :patch,  class: "form-group" do |f| %>
+                    <%= form_for([@website, @invitation], class: "form-group") do |f| %>
                     <%= hidden_field_tag :invitation, @invitation.id %>
                     <form class="form-horizontal">
                         <fieldset>

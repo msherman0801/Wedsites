@@ -6,8 +6,8 @@ ruby '2.5.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
-# Capybara testing
-gem 'capybara', '~> 2.13'
+# Postgres
+gem 'pg'
 gem "database_cleaner"
 gem 'rspec-rails'
 gem 'omniauth'
@@ -17,14 +17,10 @@ gem 'thin'
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'rails_12factor'
-# Binding.pry
-gem 'pry'
 # Hashing passwords and encryption
 gem 'bcrypt'
 # Remote storage
 gem 'google-cloud-storage', '~> 1.18'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -57,6 +53,12 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3'
+  # Binding.pry
+  gem 'pry'
+  # Capybara testing
+  gem 'capybara', '~> 2.13'
 end
 
 group :development do

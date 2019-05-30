@@ -8,4 +8,8 @@ class Invitation < ApplicationRecord
     def full_name
         "#{first_name} #{last_name}"
     end
+
+    def self.website_invitations
+        order('last_name ASC')
+    end
 end
