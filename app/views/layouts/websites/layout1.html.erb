@@ -1,9 +1,10 @@
 <html>
 
     <head>
-        <link href="/assets/bootstrap/bootstrap.min.css" rel="stylesheet">
-        <link href="/assets/strap.css" rel="stylesheet">
-        <link href="/assets/weddinglayout1.css" rel="stylesheet">
+        <%= stylesheet_link_tag 'bootstrap.min', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= stylesheet_link_tag 'strap', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= stylesheet_link_tag 'weddinglayout1', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     </head>
 
     <body>
@@ -11,11 +12,5 @@
         <%= yield %>
 
     </body>
-
-
-    <script src="/app/assets/javascripts/function.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="/app/assets/javascripts/boostrap/bootstrap.min.js"></script>
 
 </html>

@@ -37,7 +37,7 @@
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         <div class="row">
                             <div class="col-md-6">
-                                <%= link_to "Site Settings", '/dashboard/home?' + {id: w.id}.to_param, class:"btn btn-sm btn-primary", method: :post %>
+                                <%= button_to "Site Settings", '/dashboard/home?' + {id: w.id}.to_param, class:"btn btn-sm btn-primary", method: :post %>
                             </div>
                             <div class="col-md-6">
                                 <%= link_to "Launch Website", website_path(w), class:"btn btn-sm btn-primary" %>
