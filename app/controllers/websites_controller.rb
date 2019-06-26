@@ -9,10 +9,15 @@ class WebsitesController < ApplicationController
     end
 
     def create
+        binding.pry
         website = current_user.websites.create(website_params)
         session_save(2, website)
         current_website.content = Content.create
-        redirect_to home_path
+
+        respond_to do |f|
+            f.html { redirect_to home_path }
+            f.json { render json: website }
+        end
     end
 
     def image
@@ -34,7 +39,7 @@ class WebsitesController < ApplicationController
     private
 
     def website_params
-        params.require(:website).permit(:key, uploads: [])
+        params.require(:website).permit(:key)
     end
 
     def search_params
