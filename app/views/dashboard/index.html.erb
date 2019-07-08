@@ -1,7 +1,8 @@
 
-
+<div class="shuckers">
 <div style="background:#ddedf9 !important" class="jumbotron">
     <div class="container">
+    <h1><%= controller.controller_path %> <%= controller.action_name %></h1>
         <h2 class="display-4">Hello, <%= current_user.first_name %>!</h2>
         <p>Just like that, you are on your way to creating a beautiful website for a wedding! This dashboard has been designed
         with simplicity in mind. If there is a feature you can think of that isn't already on here, I urge you to get in contact with
@@ -12,22 +13,21 @@
             <%= form_for(@website, class: "form-group") do |f| %>
                 <%= f.label :key, "Wedding Name", class: "h3" %> <br />
                 <%= f.text_field :key, class: "form-control form-control-lg", style: "width: 50%;" %> <br />
-                <%= f.submit "Create a Website", class: "btn btn-primary btn-lg" %>
+                <%= f.submit "Create a Website", class: "btn btn-primary btn-lg", id: "new_website_submit" %>
             <% end %>
         </p>
     </div>
 </div>
 
-<% if @websites.present? %>
     <div class="col-sm-12 col-md-12 well" id="content">
-        <div class="container">
+        <div class="container" id="website_list" >
         <p>* a green bar above the website represents the active website in the dashboard.</p>
-        <% @websites.each do |w| %>
+        </div>
+    </div>
+
+        <!--<% @websites.each do |w| %>
             <div class="col-md-3" style="padding: 20px;">
                 <div class="card" style="width: 18rem;">
-                    <!--<% if w.uploads.attached? %>
-                        <%= image_tag(w.uploads.first, width: 230, class:"card-img-top") %>
-                    <% end %>-->
                     <% if w == current_website %>
                         <div class="card-body" style="border-top:4px solid green;">
                     <% else %>
@@ -46,7 +46,17 @@
                     </div>
                 </div>
             </div>
-        <% end %>
-        </div>
+        <% end %>-->
+
+
+        <!--<% @websites.each do |w| %>
+            <div class="col-md-3" style="padding: 20px;">
+                <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                        <h5 class="card-title">"+website.key+"</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>
+            </div>
+        <% end %>-->
     </div>
-<% end %>

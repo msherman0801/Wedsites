@@ -32,4 +32,7 @@ Rails.application.routes.draw do
     resources :events, only: [:index, :new, :edit, :create, :show, :update, :destroy]
   end
 
+  # API endpoints
+  get '/websites/:id/data' => 'websites#data'
+
 end

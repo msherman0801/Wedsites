@@ -1,7 +1,8 @@
 class WebsitesController < ApplicationController
 
     def index
-        @websites = Website.all
+        @websites = Website.all.where(user_id: current_user.id)
+        render json: @websites, status: :ok
     end
 
     def show
@@ -9,8 +10,8 @@ class WebsitesController < ApplicationController
     end
 
     def create
-        binding.pry
         website = current_user.websites.create(website_params)
+
         session_save(2, website)
         current_website.content = Content.create
 
@@ -25,7 +26,6 @@ class WebsitesController < ApplicationController
     end
 
     def update
-        binding.pry
     end
 
     def search
@@ -33,6 +33,13 @@ class WebsitesController < ApplicationController
         @results = invitations.find_by(search_params)
         @website = id(Website)
         render 'websites/results'
+    end
+
+    def data
+        if params[:id]
+            @website = id(Website)
+            render json: @website
+        end
     end
 
 

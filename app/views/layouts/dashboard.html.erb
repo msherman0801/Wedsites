@@ -1,14 +1,14 @@
 <head>
     <%= stylesheet_link_tag 'bootstrap.min', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'strap', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application' %>
-    <%= javascript_include_tag 'fetch' %>
+    <%= javascript_include_tag 'dashboard_ajax' %>
 </head>
 
-<body>
+<body class="<%= controller.controller_path %> <%= controller.action_name %>">
     <div id="throbber" style="display:none; min-height:120px;"></div>
     <div id="noty-holder"></div>
     <div id="wrapper">
+    
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-color: #212121 !important">
             <!-- Brand and toggle get grouped for better mobile display -->
