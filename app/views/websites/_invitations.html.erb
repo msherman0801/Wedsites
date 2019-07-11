@@ -1,25 +1,44 @@
-<div class="row">
-    <%= form_tag website_invitations_path(@website), method: :get do %>
-        <center>>
-
-        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-        <%= hidden_field_tag :website_id, @website.id %>
+<div class="row" style="width: 80%;">
+    <center>
         <h2 style="font-size: 30px;font-family: 'Parisienne', cursive;">Search and respond to your invitation by searching your name below.</h2>
         <br></br>
-
         <div class="col-lg-12">
+            <%= hidden_field_tag :website_id, @website.id, id: "website_id" %>
             <%= label_tag :first_name, "First Name", style: "font-size: 16px;" %>
             <%= text_field_tag :first_name, "", class: "form-control text-center", required: "required" %>
             <br />
         </div>
 
         <div class="col-lg-12">
-            <%= label_tag :first_name, "Last Name", style: "font-size: 16px;" %>   
-            <%= text_field_tag :last_name, "", class: "form-control text-center", required: "required" %>
-            <br />
+                <%= label_tag :first_name, "Last Name", style: "font-size: 16px;" %>   
+                <%= text_field_tag :last_name, "", class: "form-control text-center", required: "required" %>
+                <br />
         </div>
-    
-        <%= submit_tag "Search for Invitation", class: "form-control", style:"width: 30%;" %>
-        </center>
-    <% end %>
+        <!--<%= form_tag website_invitations_path(@website), method: :get do %>
+            <center>>
+
+            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+            <h2 style="font-size: 30px;font-family: 'Parisienne', cursive;">Search and respond to your invitation by searching your name below.</h2>
+            <br></br>
+
+            <div class="col-lg-12">
+                <%= label_tag :first_name, "First Name", style: "font-size: 16px;" %>
+                <%= text_field_tag :first_name, "", class: "form-control text-center", required: "required" %>
+                <br />
+            </div>
+
+            <div class="col-lg-12">
+                <%= label_tag :first_name, "Last Name", style: "font-size: 16px;" %>   
+                <%= text_field_tag :last_name, "", class: "form-control text-center", required: "required" %>
+                <br />
+            </div>
+        
+            <%= submit_tag "Search for Invitation", class: "form-control", style:"width: 30%;" %>
+            </center>
+        <% end %>-->
+
+        <button type="button" id="invitation_button" class="btn btn-info" data-toggle="modal" data-target="#invitationModal">
+            Search for Invitation
+        </button>
+    </center>
 </div>

@@ -5,7 +5,7 @@ class InvitationsController < DashboardController
     def index
         @website = Website.find(params[:website_id]) #using params[:website_id] because user may not be logged in
         @invitations = @website.invitations.where(invitation_params(:first_name, :last_name))
-        render :layout => "websites/layout1"
+        render json: @invitations
     end
 
     def new
