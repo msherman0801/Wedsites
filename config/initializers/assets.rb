@@ -13,4 +13,4 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 # Styling pipeline
-Rails.application.config.assets.precompile += %w( strap.css bootstrap.min.css weddinglayout1.css logo_big.png dashboard_ajax.js website_ajax.js )
+Rails.application.config.assets.precompile += %w( strap.css bootstrap.min.css weddinglayout1.css logo_big.png dashboard_index.js dashboard_invitation.js website_show.js )

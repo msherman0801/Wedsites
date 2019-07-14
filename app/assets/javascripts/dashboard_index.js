@@ -3,6 +3,7 @@
 //= require myfetch
 
 $('.dashboard .index').ready(function() {
+    console.log(window.location.pathname)
     websiteList(); //Preloads full list of user-owned websites
 
     $('#new_website').submit(function(e) { //AJAX new website form submission

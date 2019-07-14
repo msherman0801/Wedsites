@@ -26,14 +26,20 @@ class InvitationsController < DashboardController
     def edit
         @website = Website.find(params[:website_id]) #using params[:website_id] because user may not be logged in
         @invitation = Invitation.find_by(invitation_params(:id))
-        render :layout => "websites/layout1"
+        respond_to do |format|
+            format.html { render layout: "websites/layout1" }
+            format.json { render json: @invitation }
+        end
     end
 
     def update
         inv = Invitation.find_by(invitation_params(:id))
         inv.update(invitation_params(:attending, :guests, :allergies))
         website = Website.find(params[:website_id])
-        redirect_to website_path(website)
+        respond_to do |format| 
+            format.html { redirect_to website_path(website) }
+            format.json { render json: inv }
+        end
     end
 
     def delete

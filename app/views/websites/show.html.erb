@@ -1,9 +1,9 @@
+
 <div class="adminbar">
     <% if (@website && current_user) && (@website.user_id == current_user.id) %>
         <%= link_to "Go to Admin Dashboard", home_path, style: "font-size: 15px; color: white !important;" %>
     <% end %>
 </div>
-
 <div class="jumbotron parallax" style="background-image: url(<%=asset_url 'layout1/apartment'%>); background-size: cover; height: 600px; background-position: bottom;">
   <br></br>
     <center>
@@ -55,9 +55,10 @@
 <!-- Button trigger modal -->
 
 <!-- Modal -->
+
 <div class="modal" id="invitationModal" tabindex="-1" role="dialog" aria-labelledby="invitationModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content" id="invitaitonModalContent">
+    <div class="modal-content" id="invitationModalContent">
       <div class="modal-header">
         <h5 class="modal-title" id="invitationModalLabel">Invitations</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -65,11 +66,11 @@
         </button>
       </div>
       <div class="modal-body" style="word-wrap: break-word;">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
       <p class="text" id="modal_body"></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
