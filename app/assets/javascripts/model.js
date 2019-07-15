@@ -31,10 +31,11 @@ class Website {
 
 
 class Invitation {
-    constructor(id, firstName, lastName) {
+    constructor(id, firstName, lastName, website_id) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.website_id = website_id
     }
 
     showTemplate() {
@@ -100,9 +101,77 @@ class Invitation {
         </div>
         `
     }
+
+    addToListTemplate() {
+        return `
+            <tr>
+                <th><a href="/websites/${this.website_id}/invitations"><h6>Open</h6></a></th>
+                <td>${this.first_name}</td>
+                <td>${this.last_name}</td>
+            </tr>
+        `
+    }
 }
 
 class InvitationList {
+    constructor(json) {
+        this.json = json
+    }
+
+    listTemplate() {
+        return `
+        <center>
+            <div class="container">
+                <div class="d-flex justify-content-center" style="margin-top: 5%;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            ${this.json.map(item => `
+                            ${item.first_name} ${item.last_name}
+                            <br />
+                            <button onClick="showInvitation(${item.website.id},${item.id})" class="btn btn-sm btn-info">Open</button>
+                            <hr style="width: 5%; border-bottom: 2px solid grey;">
+                            `)}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </center>
+        `
+    }
+    //<th><%= link_to "Open Invitation", website_invitations_path(current_website, i), class: "h6" %></th>
+     ///websites/:website_id/invitations
+     //rails_blob_representation
+    adminListTemplate() {
+        
+        let data = this.json.map(function(item) {
+            let attending;
+
+            if (item.attending === true) {
+               attending = "<td class='text-success'>Yes</td>"
+            } else if (item.attending === false) {
+               attending = "<td class='text-danger'>No</td>"
+            } else {
+               attending = "<td></td>"
+            }
+
+            return `
+                <tr>
+                    <th><a href="/websites/${item.website.id}/invitations"><h6 class="text-info">Open</h6></a></th>
+                    <td>${item.first_name}</td>
+                    <td>${item.last_name}</td>
+                    <td>${item.date_responded !== null ? item.date_responded.split('').splice(0,10).join('') : ""}</td>
+                        ${attending}
+                    <td>${item.guests !== null ? item.guests : ""}</td>
+                    <td>${item.allergies !== null ? item.allergies : ""}</td>
+                </tr>
+            `
+        })
+        return data
+    }
+}
+
+
+class DashboardInvitationList {
     constructor(json) {
         this.json = json
     }

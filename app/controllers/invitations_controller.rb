@@ -1,6 +1,7 @@
 class InvitationsController < DashboardController
     before_action :require_website
     skip_before_action :require_login, only: [:index, :edit, :update]
+    skip_before_action :verify_authenticity_token, only: [:create]
 
     def index
         @website = Website.find(params[:website_id]) #using params[:website_id] because user may not be logged in
@@ -9,14 +10,15 @@ class InvitationsController < DashboardController
     end
 
     def new
-        @invitation = Invitation.new
-        @invitations = current_website.invitations.website_invitations
+        # invitation = Invitation.new
+        # invitations = current_website.invitations.website_invitations
+        # render json:
     end
 
     def create
         invite = Invitation.create(invitation_params(:first_name, :last_name))
         current_website.invitations << invite
-        redirect_to new_invitation_path
+        render json: invite
     end
 
     def show
@@ -34,7 +36,7 @@ class InvitationsController < DashboardController
 
     def update
         inv = Invitation.find_by(invitation_params(:id))
-        inv.update(invitation_params(:attending, :guests, :allergies))
+        inv.update(invitation_params(:attending, :guests, :allergies, :date_responded))
         website = Website.find(params[:website_id])
         respond_to do |format| 
             format.html { redirect_to website_path(website) }
@@ -45,6 +47,11 @@ class InvitationsController < DashboardController
     def delete
         id(Invitation).destroy
         redirect_to invitations_path
+    end
+
+    def data
+        invitations = current_website.invitations.website_invitations
+        render json: invitations
     end
 
     private

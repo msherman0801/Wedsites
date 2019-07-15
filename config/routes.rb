@@ -34,5 +34,6 @@ Rails.application.routes.draw do
 
   # API endpoints
   get '/websites/:id/data' => 'websites#data'
+  get '/dashboard/invitations/data' => 'invitations#data'
 
 end

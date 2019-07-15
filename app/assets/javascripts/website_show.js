@@ -63,10 +63,15 @@ function showInvitation(websiteId, id) {
             document.getElementById('edit_invitation').addEventListener('submit', function(e) {
                 e.preventDefault();
                 let token = document.getElementById('authenticity_token').value
+                let date = function() {
+                    let date = new Date();
+                    return date.toJSON().split('').splice(0,10).join('')
+                }
                 const data = {}
                 data.attending = true ? e.target[1].checked : false
                 data.guests = e.target[3].value
                 data.allergies = e.target[4].value
+                data.date_responded = date()
 
                 myFetch(`/websites/${websiteId}/invitations/${id}`, {
                     method: 'PATCH',
