@@ -1,8 +1,6 @@
 
-<div class="shuckers">
 <div style="background:#ddedf9 !important" class="jumbotron">
     <div class="container">
-    <h1><%= controller.controller_path %> <%= controller.action_name %></h1>
         <h2 class="display-4">Hello, <%= current_user.first_name %>!</h2>
         <p>Just like that, you are on your way to creating a beautiful website for a wedding! This dashboard has been designed
         with simplicity in mind. If there is a feature you can think of that isn't already on here, I urge you to get in contact with
@@ -19,44 +17,8 @@
     </div>
 </div>
 
-    <div class="col-sm-12 col-md-12 well" id="content">
-        <div class="container" id="website_list" >
-        <p>* a green bar above the website represents the active website in the dashboard.</p>
-        </div>
+<div class="col-sm-12 col-md-12 well" id="content">
+    <div class="container" id="website_list" >
+    <p>* a green bar above the website represents the active website in the dashboard.</p>
     </div>
-
-        <!--<% @websites.each do |w| %>
-            <div class="col-md-3" style="padding: 20px;">
-                <div class="card" style="width: 18rem;">
-                    <% if w == current_website %>
-                        <div class="card-body" style="border-top:4px solid green;">
-                    <% else %>
-                        <div class="card-body">
-                    <% end %>
-                        <h5 class="card-title"><%= w.key %></h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <%= button_to "Site Settings", '/dashboard/home?' + {id: w.id}.to_param, class:"btn btn-sm btn-primary", method: :post %>
-                            </div>
-                            <div class="col-md-6">
-                                <%= link_to "Launch Website", website_path(w), class:"btn btn-sm btn-primary" %>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <% end %>-->
-
-
-        <!--<% @websites.each do |w| %>
-            <div class="col-md-3" style="padding: 20px;">
-                <div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                        <h5 class="card-title">"+website.key+"</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-        <% end %>-->
-    </div>
+</div>

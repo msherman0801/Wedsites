@@ -4,13 +4,13 @@
 
 
 $('.website.show').ready(function() {
-    const url = this.URL.split('')
+    const url = this.URL.split('/')
     const websiteId = url[url.length-1]
     myFetch(`/websites/${websiteId}/data`, {method: 'get'})
         .then(data => data.json())
         .then(function(json) {
-            console.log('trest')
             appendData(json)
+            showEventList(json)
         })
     
     $('.modal').on('shown.bs.modal', function () {
@@ -28,7 +28,7 @@ $('.website.show').ready(function() {
 
 function appendData(data) {
     $('#content_about_us').text(`${data.content.about_us}`)
-    $('#content_date').text(`${data.content.date}`)
+    data.content.date ? $('#content_date').text(`${data.content.date}`) : $('#content_date').text(`DD/MM/YYYY`)
     $('#content_location').text(`${data.content.location}`)
     $('#content_summary').text(`${data.content.summary}`)
     $('#content_contact_name').text(`${data.content.contact_name}`)
@@ -36,6 +36,7 @@ function appendData(data) {
 }
 
 function showInvitationList(firstName, lastName, id) {
+
     myFetch(`/websites/${id}/invitations?first_name=${firstName}&last_name=${lastName}`,{
             headers: {
                 'Content-Type': 'application/json',
@@ -48,18 +49,17 @@ function showInvitationList(firstName, lastName, id) {
                     $('#modal_body').html(`<h3 class="text-danger text-center">No invitation was found under that name.</h3>`)
                 } else {
                     let list = new InvitationList(json)
-                $('#modal_body').html(list.listTemplate())}
+                    $('#modal_body').html(list.listTemplate())
+                }
             })
             .catch(error => console.log(error))
 }
 
-function showInvitation(websiteId, id) {
-    myFetch(`/websites/${websiteId}/invitations/${id}/edit.json`)
-        .then(response => response.json())
-        .then(function(inv) {
-            let invitation = new Invitation(inv.id, inv.first_name, inv.last_name)
-            $('#modal_body').html(invitation.showTemplate())
+function showInvitation(list) {
 
+            let invitation = new Invitation(list)
+            $('#modal_body').html(invitation.showTemplate())
+    
             document.getElementById('edit_invitation').addEventListener('submit', function(e) {
                 e.preventDefault();
                 let token = document.getElementById('authenticity_token').value
@@ -73,7 +73,7 @@ function showInvitation(websiteId, id) {
                 data.allergies = e.target[4].value
                 data.date_responded = date()
 
-                myFetch(`/websites/${websiteId}/invitations/${id}`, {
+                myFetch(`/websites/${list.websiteId}/invitations/${list.id}`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',
@@ -85,17 +85,18 @@ function showInvitation(websiteId, id) {
                     .then(response => response.json())
                     .then(function(json) {
                         if (json.id) {
-                            $('#modal_body').html(`<h2 class="te xt-info text-center">Thank you for your response.</h2>`)
+                            $('#modal_body').html(`<h2 class="text-info text-center">Thank you for your response.</h2>`)
                         } else {
                             $('#modal_body').html(`<h2 class="text-danger text-center">Uh oh! There was an issue and your invitation was not received.</h2>`)
                         }
                     })
                     .catch(error => console.log(error))
             })
-        })
-        .catch(error => console.log(error))
+        
 }
 
-
-
+function showEventList(json) {
+    let event_list = new WebsiteEventList(json.events)
+    $('#events').html(event_list.listTemplate())
+}
 

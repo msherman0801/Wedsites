@@ -1,10 +1,12 @@
+var invitationList;
+
 $(document).ready(function() {
     if (window.location.pathname === '/dashboard/invitations/new') {
         myFetch('/dashboard/invitations/data')
             .then(response => response.json())
             .then(function(json) {
-                let data = new InvitationList(json)
-                $('#dashboard_invitations_list').html(data.adminListTemplate())
+                invitationList = new InvitationList(json)
+                $('#dashboard_invitations_list').html(invitationList.adminListTemplate())
             })
             .catch(error => console.log(error))
 
@@ -24,12 +26,25 @@ $(document).ready(function() {
                     body: JSON.stringify(data)
                 })
                 .then(response => response.json())
-                .then(function(json) {
-                    let inv = new Invitation(json.id, json.first_name, json.last_name, json.website.id)
+                .then(function(invitation) {
+                    let inv = new Invitation(invitation)
                     $('#dashboard_invitations_list').append(inv.addToListTemplate())
+                    document.querySelector('#first_name').value = ""
+                    document.querySelector('#last_name').value = ""
                 })
                 .catch(error => console.log(error))
             
         })
     }
+    
 });
+
+function sortAttending() {
+    let sortedByAttending = invitationList.sortByAttending()
+    $('#dashboard_invitations_list').html(sortedByAttending.adminListTemplate())
+}
+
+function sortLastName() {
+    let sortedByName = invitationList.sortByLastName()
+    $('#dashboard_invitations_list').html(sortedByName.adminListTemplate())
+}

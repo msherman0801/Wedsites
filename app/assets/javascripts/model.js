@@ -1,21 +1,19 @@
 class Website {
-    constructor(key, id) {
-        this.id = id;
-        this.key = key;
+    constructor(website) {
+        this.id = website.id;
+        this.key = website.key;
+        this.summary = website.summary
+        
     }
 
     dashTemplate() {
-        return `<div class="col-md-3" style="padding: 20px;">
+        return `<div class="col-md-3" style="padding: 10px; padding-bottom: 20px; border-bottom: 1px solid rgba(33,33,33,.1);>
                     <div class="card" style="width: 18rem;">
                             <div class="card-body">
-                            <h5 class="card-title">${this.key}</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <div class="col-md-6">
-                                    <a href="/websites/${this.id}" class="btn btn-sm btn-primary" style="width: 100%;">Launch</a>
-                                </div>
-                                <div class="col-md-6">
-                                    <a href="/websites/${this.id}" class="btn btn-sm btn-primary" style="width: 100%;">Settings</a>
-                                </div>
+                                <h5 class="card-title">${this.key}</h5>
+                                <input type="hidden" id=${this.id}>
+                                <p class="card-text">${this.summary}</p>
+                                <a href="/dashboard/websites/${this.id}/active" class="btn btn-sm btn-primary">Activate</a>
                             </div>
                         </div>
                     </div>
@@ -31,11 +29,11 @@ class Website {
 
 
 class Invitation {
-    constructor(id, firstName, lastName, website_id) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.website_id = website_id
+    constructor(invitation) {
+        this.id = invitation.id;
+        this.firstName = invitation.firstName;
+        this.lastName = invitation.lastName;
+        this.websiteId = invitation.websiteId;
     }
 
     showTemplate() {
@@ -105,9 +103,9 @@ class Invitation {
     addToListTemplate() {
         return `
             <tr>
-                <th><a href="/websites/${this.website_id}/invitations"><h6>Open</h6></a></th>
-                <td>${this.first_name}</td>
-                <td>${this.last_name}</td>
+                <th><a href="/websites/${this.websiteId}/invitations"><h6>Open</h6></a></th>
+                <td>${this.firstName}</td>
+                <td>${this.lastName}</td>
             </tr>
         `
     }
@@ -128,7 +126,7 @@ class InvitationList {
                             ${this.json.map(item => `
                             ${item.first_name} ${item.last_name}
                             <br />
-                            <button onClick="showInvitation(${item.website.id},${item.id})" class="btn btn-sm btn-info">Open</button>
+                            <button onClick="showInvitation({websiteId: ${item.website.id}, id: ${item.id}, firstName: '${item.first_name}', lastName: '${item.last_name}'} )" class="btn btn-sm btn-info">Open</button>
                             <hr style="width: 5%; border-bottom: 2px solid grey;">
                             `)}
                         </div>
@@ -143,7 +141,7 @@ class InvitationList {
      //rails_blob_representation
     adminListTemplate() {
         
-        let data = this.json.map(function(item) {
+        return this.json.map(function(item) {
             let attending;
 
             if (item.attending === true) {
@@ -166,14 +164,49 @@ class InvitationList {
                 </tr>
             `
         })
-        return data
     }
+
+    sortByLastName() {
+        this.json = this.json.sort(function(a, b) {
+            var nameA = a.last_name.toUpperCase(); // ignore upper and lowercase
+            var nameB = b.last_name.toUpperCase(); // ignore upper and lowercase
+            if (nameA < nameB) {
+              return -1;
+            }
+            if (nameA > nameB) {
+              return 1;
+            }
+          
+            // names must be equal
+            return 0;
+          });
+        return this;
+    }
+
+    sortByAttending() {
+        this.json = this.json.sort(function(a, b) {
+            var yes = a.attending // ignore upper and lowercase
+            var no = b.attending // ignore upper and lowercase
+            if (yes < no) {
+              return 1;
+            }
+            if (yes > no) {
+              return -1;
+            }
+          
+            // names must be equal
+            return 0;
+          });
+        return this;
+    }
+
+
 }
 
 
 class DashboardInvitationList {
-    constructor(json) {
-        this.json = json
+    constructor(invitations) {
+        this.invitations = invitations
     }
 
     listTemplate() {
@@ -183,7 +216,7 @@ class DashboardInvitationList {
                 <div class="d-flex justify-content-center" style="margin-top: 5%;">
                     <div class="row">
                         <div class="col-md-12">
-                            ${this.json.map(item => `
+                            ${this.invitations.map(item => `
                             ${item.first_name} ${item.last_name}
                             <br />
                             <button onClick="showInvitation(${item.website.id},${item.id})" class="btn btn-sm btn-info">Open Invitation</button>
@@ -195,5 +228,48 @@ class DashboardInvitationList {
             </div>
         </center>
         `
+    }
+}
+
+
+class WebsiteEventList {
+    constructor(events) {
+        this.events = events
+    }
+
+
+    listTemplate() {
+        if (this.events.length > 0) {
+            return `
+                <div class="row">
+                        ${this.events.map(function(event) {
+                        return `<div class="col-md-4">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h2>${ event.title }</h2>
+                                </div>
+                                <div class="panel-body">
+                                    <p class="panel-paragraph">Description</p>
+                                    <p>${ event.description }</p>
+                                    <p class="panel-paragraph">Date</p>
+                                    <p><small>${ event.date }</small></p>
+                                    <p class="panel-paragraph">Location</p>
+                                    <p>${ event.location }</p>
+                                    <p class="panel-paragraph">Attire</p>
+                                    <p>${ event.attire }</p>
+                                </div>
+                            </div>
+                        </div>
+                        `
+                        })
+                    }
+                </div>`
+        } else {
+            return `<div class="col-md-12">
+                <center> 
+                    <h1>There are no events yet!</h1>
+                </center>
+            </div>`
+        }
     }
 }

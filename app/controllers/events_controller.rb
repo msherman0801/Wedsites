@@ -36,6 +36,12 @@ class EventsController < DashboardController
         redirect_to events_path
     end
 
+    def data
+        events = id(Website).events
+        binding.pry
+        render json: events
+    end
+
     private
 
     def event_params

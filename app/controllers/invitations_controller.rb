@@ -50,7 +50,7 @@ class InvitationsController < DashboardController
     end
 
     def data
-        invitations = current_website.invitations.website_invitations
+        invitations = current_website.invitations
         render json: invitations
     end
 

@@ -1,8 +1,10 @@
 class WebsitesController < ApplicationController
 
     def index
-        @websites = Website.all.where(user_id: current_user.id)
-        render json: @websites, status: :ok
+        websites = Website.all.where(user_id: current_user.id)
+        render json: {
+            websites: websites.as_json(include: { content: {only: [:summary] }}),
+            current_website: current_website}, status: :ok
     end
 
     def show
@@ -36,9 +38,11 @@ class WebsitesController < ApplicationController
     end
 
     def data
-        if params[:id]
+        if id(Website)
             @website = id(Website)
             render json: @website
+        else
+            redirect_to home_path
         end
     end
 

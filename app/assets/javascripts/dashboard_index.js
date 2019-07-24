@@ -21,25 +21,43 @@ $(document).ready(function() {
             })
                 .then(data => data.json())
                 .then(function(website) {
-                    let web = new Website(website.id, website.key)
+                    let web = new Website(website)
                     appendList('#website_list', web)
                     e.target.querySelector('input[type=submit]').disabled = false
                     e.target[2].value = ""
                 })
                 .catch(error => console.log(error))
         })
+        // myFetch('/dashboard/websites/active') // Checks for current website and updates
+        //     .then(response => response.json())
+        //     .then(function(json) {
+        //         let active = document.getElementById(`${json.id}`).parentNode
+        //         active.style.borderTopWidth = '3px'
+        //         active.style.borderTopStyle = 'solid'
+        //         active.style.borderTopColor = 'green'
+        //     })
+        //     .catch(error => console.log(error))
 
 
         function websiteList() {
             myFetch('/websites')
                 .then(data => data.json())
                 .then(function(data) {
-                    data.forEach(function(website) {
-                        let web = new Website(website.key, website.id)
+                    data.websites.forEach(function(website) {
+                        let web = new Website({key: website.key, id: website.id, summary: website.content.summary})
                         appendList('#website_list', web)
                     })
+                    assignActive(data.current_website)
                 })
                 .catch(error => console.log(error))
+        }
+
+        function assignActive(website) {
+            let active = document.getElementById(`${website.id}`).parentNode
+            active.style.borderTopWidth = '4px'
+            active.style.borderTopStyle = 'solid'
+            active.style.borderTopColor = 'green'
+            active.style.marginTop = '-4px'
         }
         
         function appendList(list, item) {
